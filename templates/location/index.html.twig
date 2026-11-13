@@ -26,8 +26,12 @@
                 <td>{{ location.latitude }}</td>
                 <td>{{ location.longitude }}</td>
                 <td>
-                    <a href="{{ path('app_location_show', {'id': location.id}) }}">Szczegóły</a>
-                    <a href="{{ path('app_location_edit', {'id': location.id}) }}">Edytuj</a>
+                    {% if is_granted('ROLE_LOCATION_SHOW') %}
+                        <a href="{{ path('app_location_show', {'id': location.id}) }}">Szczegóły</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_LOCATION_EDIT') %}
+                        <a href="{{ path('app_location_edit', {'id': location.id}) }}">Edytuj</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -39,5 +43,7 @@
     </table>
     </div>
 
-    <a href="{{ path('app_location_new') }}" class="btn btn-primary">Dodaj</a>
+    {% if is_granted('ROLE_LOCATION_NEW') %}
+        <a href="{{ path('app_location_new') }}" class="btn btn-primary">Dodaj</a>
+    {% endif %}
 {% endblock %}

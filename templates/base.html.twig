@@ -30,6 +30,11 @@
                 <span class="navbar-brand">Pogodynka</span>
                 <a class="nav-link text-white" href="{{ path('app_location_index') }}">Lokalizacje</a>
                 <a class="nav-link text-white" href="{{ path('app_measurement_index') }}">Pomiary</a>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a class="nav-link text-white" href="{{ path('app_logout') }}">Logout</a>
+                {% else %}
+                    <a class="nav-link text-white" href="{{ path('app_login') }}">Login</a>
+                {% endif %}
             </div>
         </nav>
         <main class="container pb-4">

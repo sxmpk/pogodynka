@@ -26,8 +26,12 @@
                 <td>{{ measurement.celsius }}</td>
                 <td>{{ measurement.humidity }}</td>
                 <td>
-                    <a href="{{ path('app_measurement_show', {'id': measurement.id}) }}">Szczegóły</a>
-                    <a href="{{ path('app_measurement_edit', {'id': measurement.id}) }}">Edytuj</a>
+                    {% if is_granted('ROLE_MEASUREMENT_SHOW') %}
+                        <a href="{{ path('app_measurement_show', {'id': measurement.id}) }}">Szczegóły</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_MEASUREMENT_EDIT') %}
+                        <a href="{{ path('app_measurement_edit', {'id': measurement.id}) }}">Edytuj</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -39,5 +43,7 @@
     </table>
     </div>
 
-    <a href="{{ path('app_measurement_new') }}" class="btn btn-primary">Dodaj</a>
+    {% if is_granted('ROLE_MEASUREMENT_NEW') %}
+        <a href="{{ path('app_measurement_new') }}" class="btn btn-primary">Dodaj</a>
+    {% endif %}
 {% endblock %}
