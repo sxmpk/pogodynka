@@ -1,4 +1,6 @@
+{% if is_granted('ROLE_MEASUREMENT_DELETE') %}
 <form method="post" action="{{ path('app_measurement_delete', {'id': measurement.id}) }}" onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ measurement.id) }}">
     <button class="btn btn-danger mt-3">Usuń</button>
 </form>
+{% endif %}

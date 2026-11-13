@@ -1,4 +1,6 @@
+{% if is_granted('ROLE_LOCATION_DELETE') %}
 <form method="post" action="{{ path('app_location_delete', {'id': location.id}) }}" onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ location.id) }}">
     <button class="btn btn-danger mt-3">Usuń</button>
 </form>
+{% endif %}

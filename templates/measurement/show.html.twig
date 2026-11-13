@@ -28,7 +28,9 @@
 
     <a href="{{ path('app_measurement_index') }}">Powrót do listy</a>
 
-    <a href="{{ path('app_measurement_edit', {'id': measurement.id}) }}">Edytuj</a>
+    {% if is_granted('ROLE_MEASUREMENT_EDIT') %}
+        <a href="{{ path('app_measurement_edit', {'id': measurement.id}) }}">Edytuj</a>
+    {% endif %}
 
     {{ include('measurement/_delete_form.html.twig') }}
 {% endblock %}
