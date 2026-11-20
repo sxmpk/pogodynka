@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prognoza Open-Meteo{% endblock %}
+
+{% block body %}
+    <h1>Prognoza Open-Meteo</h1>
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.latitude) }}
+        {{ form_row(form.longitude) }}
+        <button type="submit" class="btn btn-primary">Pobierz prognozę</button>
+    {{ form_end(form) }}
+
+    {% if forecast is not empty %}
+        <div class="table-responsive mt-4">
+            <table class="table table-striped">
+                <caption class="caption-top">Prognoza dzienna (UTC)</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Data</th>
+                        <th scope="col">Temperatura maks. (°C)</th>
+                        <th scope="col">Temperatura min. (°C)</th>
+                        <th scope="col">Suma opadów (mm)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, date in forecast.time %}
+                        <tr>
+                            <th scope="row">{{ date }}</th>
+                            <td>{{ forecast.temperature_2m_max[index] ?? '—' }}</td>
+                            <td>{{ forecast.temperature_2m_min[index] ?? '—' }}</td>
+                            <td>{{ forecast.precipitation_sum[index] ?? '—' }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}
