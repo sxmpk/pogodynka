@@ -1,0 +1,7 @@
+city,country,date,celsius,fahrenheit
+{% for measurement in measurements -%}
+    {{ locationColumns|join(',')|raw }},
+    {{- measurement.date|date('Y-m-d') }},
+    {{- measurement.celsius }},
+    {{- measurement.fahrenheit }}{{ "\n" -}}
+{% endfor %}
